@@ -25,7 +25,7 @@ modules:
     sources:
       - type: svn
         url: https://svn.zdechov.net/translines/tags/1.4.0
-        revision: r148
+        revision: r149
     buildsystem: simple
     build-commands:
       - |
