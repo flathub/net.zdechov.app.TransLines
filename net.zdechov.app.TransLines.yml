@@ -1,10 +1,12 @@
 app-id: net.zdechov.app.TransLines
 runtime: org.kde.Platform
-runtime-version: '5.15-23.08'
+runtime-version: '5.15-24.08'
 sdk: org.kde.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.freepascal
 command: TransLines
+rename-icon: TransLines
+rename-desktop-file: TransLines.desktop
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -25,16 +27,15 @@ modules:
     sources:
       - type: svn
         url: https://svn.zdechov.net/translines/tags/1.4.0
-        revision: r149
+        revision: r154
     buildsystem: simple
     build-commands:
       - |
         . /usr/lib/sdk/freepascal/enable.sh
         lazbuild --build-mode=Release --ws=qt5 TransLines.lpi
-      - install -Dm755 TransLines -t $FLATPAK_DEST/share/TransLines
-      - install -d $FLATPAK_DEST/bin
-      - ln -s $FLATPAK_DEST/share/TransLines/TransLines $FLATPAK_DEST/bin/TransLines
-      - install -Dm644 Install/flatpak/${FLATPAK_ID}.desktop -t $FLATPAK_DEST/share/applications
-      - install -Dm644 Images/256x256/TransLines.png $FLATPAK_DEST/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm755 TransLines -t $FLATPAK_DEST/bin
+      - install -Dm644 Install/deb/TransLines.desktop -t $FLATPAK_DEST/share/applications
+      - install -Dm644 Images/256x256/TransLines.png -t $FLATPAK_DEST/share/icons/hicolor/256x256/apps
       - install -Dm644 Languages/*.po -t $FLATPAK_DEST/share/TransLines/Languages
-      - install -Dm644 Install/flatpak/${FLATPAK_ID}.appdata.xml $FLATPAK_DEST/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 Packages/Common/Languages/*.po -t $FLATPAK_DEST/share/TransLines/Languages
+      - install -Dm644 Install/flatpak/${FLATPAK_ID}.metainfo.xml -t $FLATPAK_DEST/share/metainfo
